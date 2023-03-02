@@ -1,0 +1,11 @@
+service wall
+{
+	disable		= no
+	protocol	= tcp
+	port		= 6001
+	server		= /home/bpquser/wall.py
+	user		= bpquser
+	socket_type	= stream
+	wait		= no
+}
+
