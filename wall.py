@@ -5,6 +5,7 @@
 # digitaljackalope@github Mar-2023
 # ...nothing fancy...
 
+import sys
 import sqlite3
 import datetime
 
@@ -52,6 +53,12 @@ while True:
         message = input("Enter your message (limit {0} characters): ".format(max_message_length)).strip()[:max_message_length]
 
         if message:
+            # Check if the message starts with "*** Disconnected from"
+            if message.startswith("*** Disconnected from"):
+                print("Disconnect detected, ignoring post.")
+                conn.close()
+                sys.exit()
+
             # insert the message into the database
             c.execute("INSERT INTO messages (callsign, message) VALUES (?, ?)", (callsign, message))
             conn.commit()
