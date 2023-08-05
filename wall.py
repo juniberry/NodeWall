@@ -39,8 +39,8 @@ while True:
     if rows:
         print("\nShowing entries {0}-{1} of {2}:".format(start_index+1, start_index+len(rows), num_messages))
         for row in rows:
-            date_string = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S').strftime('%d-%b-%Y %H:%M')
-            print(date_string, "-", row[1], ":", row[2])
+            date_string = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S').strftime('(%d-%b %H:%M)')
+            print(date_string,"<",row[1], ">", row[2])
     else:
         print("\nNo more entries to show.")
 
@@ -58,7 +58,6 @@ while True:
                 print("Disconnect detected, ignoring post.")
                 conn.close()
                 sys.exit()
-
             # insert the message into the database
             c.execute("INSERT INTO messages (callsign, message) VALUES (?, ?)", (callsign, message))
             conn.commit()
