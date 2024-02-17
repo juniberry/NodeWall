@@ -73,7 +73,12 @@ while True:
         print("\nNo more posts to show.")
 
     # present options to the user
-    print("\n[P]ost a message [B]ack [F]orward [D]elete E[x]it")
+    print("\n[P]ost a message ", end="")
+    if start_index > 0:
+        print("[B]ack ", end="")
+    if num_messages > num_entries and start_index + num_entries < num_messages:
+        print("[F]orward ", end="")
+    print("[D]elete E[x]it")
     choice = input().lower().strip()
 
     if choice == "p":
