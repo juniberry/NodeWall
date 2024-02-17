@@ -81,6 +81,11 @@ while True:
     print("[D]elete E[x]it")
     choice = input().lower().strip()
 
+    while choice not in ("p", "b", "f", "d", "x"):
+        print("Invalid command")
+        print("Commands are the letters in square brackets above")
+        choice = input().lower().strip()
+
     if choice == "p":
         # ask the user for a message
         message = input("Enter your post (limit {0} characters): ".format(max_message_length)).strip()[:max_message_length]
