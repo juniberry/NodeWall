@@ -54,6 +54,7 @@ APPLICATION 10,WALL,C 15 HOST 1 S,N0CALL-14,CALWAL,255
 Note: CMDPORT= ports are zero indexed, such that "C 15 HOST 1 S" will connect to port 15 (Telnet) in the example config, and then connect to local host on command port 1 which is the second port 6001 in the CMDPORT= list.
 **The "S" in the connect string tells BPQ to return the user to the node when they exit NodeWall.**
 
+## inetd server
 You can run NodeWall from inet.d or xinet.d as a TCP service[^2]:
 ```
 service wall
@@ -68,5 +69,33 @@ service wall
 }
 ```
 
+## systemd server
+You can also run NodeWall from systemd as a socket service[^3]:
+
+/etc/systemd/system/wall.socket
+```
+[Unit]
+Description=LinBPQ Wall
+
+[Socket]
+ListenStream=6001
+Accept=yes
+
+[Install]
+WantedBy=sockets.target
+```
+
+/etc/systemd/system/wall@.service
+```
+[Unit]
+Description=LinBPQ Wall Server
+
+[Service]
+ExecStart=/home/bpquser/wall.py
+StandardInput=socket
+User=bpquser
+Group=bpquser
+```
 [^1]: [LinBPQ Applications Interface](https://www.cantab.net/users/john.wiseman/Documents/LinBPQ%20Applications%20Interface.html)
 [^2]: [xinet.d](https://en.wikipedia.org/wiki/Xinetd)
+[^3]: [systemd](https://en.wikipedia.org/wiki/Systemd)
