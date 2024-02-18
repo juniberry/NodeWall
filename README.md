@@ -96,6 +96,11 @@ StandardInput=socket
 User=bpquser
 Group=bpquser
 ```
+Then enable the service
+
+```
+sudo systemctl enable wall.socket
+```
 [^1]: [LinBPQ Applications Interface](https://www.cantab.net/users/john.wiseman/Documents/LinBPQ%20Applications%20Interface.html)
 [^2]: [xinet.d](https://en.wikipedia.org/wiki/Xinetd)
 [^3]: [systemd](https://en.wikipedia.org/wiki/Systemd)
