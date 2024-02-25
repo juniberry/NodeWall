@@ -83,8 +83,8 @@ while True:
     choice, args = choice[0], choice[1:]
 
     while choice not in ("p", "b", "f", "d", "x"):
-        print("Invalid command")
-        print("Commands are the letters in square brackets above")
+        print("Invalid command.")
+        print("Commands are the letters in square brackets above.")
         choice = input().lower().strip().split(" ")
         choice, args = choice[0], choice[1:]
 
