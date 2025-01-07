@@ -79,16 +79,22 @@ while True:
     if num_messages > num_entries and start_index + num_entries < num_messages:
         print("[F]orward ", end="")
     print("[D]elete E[x]it")
-    choice = input().lower().strip()
+    choice = input().strip().split(" ")
+    choice, args = choice[0].lower(), choice[1:]
 
     while choice not in ("p", "b", "f", "d", "x"):
-        print("Invalid command")
-        print("Commands are the letters in square brackets above")
-        choice = input().lower().strip()
+        print("Invalid command.")
+        print("Commands are the letters in square brackets above.")
+        choice = input().strip().split(" ")
+        choice, args = choice[0].lower(), choice[1:]
 
     if choice == "p":
-        # ask the user for a message
-        message = input("Enter your post (limit {0} characters): ".format(max_message_length)).strip()[:max_message_length]
+        if len(args) > 0:
+          message = " ".join(args)
+        else:
+          # ask the user for a message
+          message = input("Enter your post (limit {0} characters): ".format(max_message_length))
+        message = message.strip()[:max_message_length]
 
         if message:
             # Check if the message starts with "*** Disconnected from"
