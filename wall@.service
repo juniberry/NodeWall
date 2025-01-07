@@ -1,0 +1,11 @@
+[Unit]
+Description=LinBPQ Wall Server
+
+[Service]
+ExecStart=/home/bpquser/wall.py
+StandardInput=socket
+StandardOutput=socket
+User=bpquser
+
+[Install]
+WantedBy=multi-user.target

@@ -68,39 +68,22 @@ service wall
 	wait		= no
 }
 ```
+And adding wall to /etc/services.
+
 
 ## systemd server
-You can also run NodeWall from systemd as a socket service[^3]:
+You can run NodeWall from systemd as a socket service[^3]:
 
-/etc/systemd/system/wall.socket
+Edit the supplied *wall.socket* and *wall@.service* to match the _path, username and port_ of your configuration.
+Copy *wall.socket* and *wall@.service* to */etc/systemd/system/*.
+
+Then enable the service:
 ```
-[Unit]
-Description=LinBPQ Wall
-
-[Socket]
-ListenStream=6001
-Accept=yes
-
-[Install]
-WantedBy=sockets.target
-```
-
-/etc/systemd/system/wall@.service
-```
-[Unit]
-Description=LinBPQ Wall Server
-
-[Service]
-ExecStart=/home/bpquser/wall.py
-StandardInput=socket
-User=bpquser
-Group=bpquser
-```
-Then enable the service
-
-```
+sudo systemctl daemon-reload
 sudo systemctl enable wall.socket
+sudo systemctl start wall.socket
 ```
+
 [^1]: [LinBPQ Applications Interface](https://www.cantab.net/users/john.wiseman/Documents/LinBPQ%20Applications%20Interface.html)
 [^2]: [xinet.d](https://en.wikipedia.org/wiki/Xinetd)
 [^3]: [systemd](https://en.wikipedia.org/wiki/Systemd)
